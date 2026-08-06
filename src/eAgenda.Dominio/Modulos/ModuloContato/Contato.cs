@@ -49,10 +49,10 @@ public class Contato : EntidadeBase<Contato>
         if (!Regex.IsMatch(Telefone, @"^\(\d{2}\) \d{4,5}-\d{4}$"))
             erros.Add("O campo \"Telefone\" deve estar no formato (XX) XXXX-XXXX ou (XX) XXXXX-XXXX.");
 
-        if (!string.IsNullOrWhiteSpace(Cargo) && Cargo.Length > 100)
+        else if (!string.IsNullOrWhiteSpace(Cargo) && Cargo.Length > 100)
             erros.Add("O campo \"Cargo\" deve conter no máximo 100 caracteres.");
 
-        if (!string.IsNullOrWhiteSpace(Empresa) && Empresa.Length > 100)
+        else if (!string.IsNullOrWhiteSpace(Empresa) && Empresa.Length > 100)
             erros.Add("O campo \"Empresa\" deve conter no máximo 100 caracteres.");
 
         return erros;
