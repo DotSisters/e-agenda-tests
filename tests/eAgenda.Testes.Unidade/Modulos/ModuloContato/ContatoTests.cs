@@ -1,6 +1,4 @@
-using eAgenda.Dominio.Modulos.ModuloCompromisso;
 using eAgenda.Dominio.Modulos.ModuloContato;
-
 namespace eAgenda.Testes.Unidade.Modulos.ModuloContato;
 
 [TestClass]
