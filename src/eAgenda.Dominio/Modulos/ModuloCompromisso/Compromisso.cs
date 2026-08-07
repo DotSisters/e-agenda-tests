@@ -64,13 +64,13 @@ public class Compromisso : EntidadeBase<Compromisso>
         if (Tipo == TipoCompromisso.Presencial && string.IsNullOrWhiteSpace(Local))
             erros.Add("O campo \"Local\" deve ser preenchido para compromissos presenciais.");
 
+        else if (!string.IsNullOrWhiteSpace(Local) && Local.Length > 255)
+            erros.Add("O campo \"Local\" deve conter no máximo 255 caracteres.");
+
         if (Tipo == TipoCompromisso.Remoto && string.IsNullOrWhiteSpace(Link))
             erros.Add("O campo \"Link\" deve ser preenchido para compromissos remotos.");
 
-        if (!string.IsNullOrWhiteSpace(Local) && Local.Length > 255)
-            erros.Add("O campo \"Local\" deve conter no máximo 255 caracteres.");
-
-        if (!string.IsNullOrWhiteSpace(Link) && Link.Length > 500)
+        else if (!string.IsNullOrWhiteSpace(Link) && Link.Length > 500)
             erros.Add("O campo \"Link\" deve conter no máximo 500 caracteres.");
 
         return erros;
