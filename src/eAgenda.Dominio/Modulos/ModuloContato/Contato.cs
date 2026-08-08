@@ -43,16 +43,22 @@ public class Contato : EntidadeBase<Contato>
         else if (Nome.Length > 100)
             erros.Add("O campo \"Nome\" deve conter no máximo 100 caracteres.");
 
-        if (!Regex.IsMatch(Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+        if (string.IsNullOrWhiteSpace(Email))
+            erros.Add("O campo \"E-mail\" deve ser preenchido.");
+
+        else if (!Regex.IsMatch(Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             erros.Add("O campo \"E-mail\" deve conter um endereço de e-mail válido.");
 
-        if (!Regex.IsMatch(Telefone, @"^\(\d{2}\) \d{4,5}-\d{4}$"))
+        if (string.IsNullOrWhiteSpace(Telefone))
+            erros.Add("O campo \"Telefone\" deve ser preenchido.");
+
+        else if (!Regex.IsMatch(Telefone, @"^\(\d{2}\) \d{4,5}-\d{4}$"))
             erros.Add("O campo \"Telefone\" deve estar no formato (XX) XXXX-XXXX ou (XX) XXXXX-XXXX.");
 
-        else if (!string.IsNullOrWhiteSpace(Cargo) && Cargo.Length > 100)
+        if (!string.IsNullOrWhiteSpace(Cargo) && Cargo.Length > 100)
             erros.Add("O campo \"Cargo\" deve conter no máximo 100 caracteres.");
 
-        else if (!string.IsNullOrWhiteSpace(Empresa) && Empresa.Length > 100)
+        if (!string.IsNullOrWhiteSpace(Empresa) && Empresa.Length > 100)
             erros.Add("O campo \"Empresa\" deve conter no máximo 100 caracteres.");
 
         return erros;
