@@ -26,7 +26,7 @@ public sealed class CategoriaTests
 
         Assert.HasCount(1, erros);
         Assert.AreEqual(
-            "O campo \"Titulo\" deve ser preenchido.",
+            "O campo \"Título\" deve ser preenchido.",
             erros.First()
         );
     }
@@ -40,7 +40,7 @@ public sealed class CategoriaTests
 
         Assert.HasCount(1, erros);
         Assert.AreEqual(
-            "O campo \"Titulo\" deve conter no mínimo 2 caracteres.",
+            "O campo \"Título\" deve conter no mínimo 2 caracteres.",
             erros.First()
         );
     }
@@ -66,7 +66,7 @@ public sealed class CategoriaTests
 
         Assert.HasCount(1, erros);
         Assert.AreEqual(
-            "O campo \"Titulo\" deve conter no máximo 100 caracteres.",
+            "O campo \"Título\" deve conter no máximo 100 caracteres.",
             erros.First()
         );
     }
@@ -82,7 +82,7 @@ public sealed class CategoriaTests
     }
 
     [TestMethod]
-    public void Atualizar_DeveAtualizar_ComDadosValidos()
+    public void Atualizar_ComDadosValidos()
     {
         Categoria categoria = new("Mercado");
 
