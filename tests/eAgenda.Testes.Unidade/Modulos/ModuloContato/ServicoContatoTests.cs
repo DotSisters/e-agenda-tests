@@ -387,7 +387,7 @@ public sealed class ServicoContatoTestes
     }
 
     [TestMethod]
-    public void Editar_MantendoCampos_EmailTelefone_PersisteContato()
+    public void Editar_MantendoEmailTelefone_PersisteContato()
     {
         Mock<IRepositorioContato> repositorioContato = new();
         Mock<IRepositorioCompromisso> repositorioCompromisso = new();
@@ -522,7 +522,6 @@ public sealed class ServicoContatoTestes
         Assert.AreEqual("Analista", contatosListados[1].Cargo);
         Assert.AreEqual("Empresa", contatosListados[1].Empresa);
     }
-
 
     [TestMethod]
     public void Excluir_SemCompromissosVinculados_ExcluiContato()
