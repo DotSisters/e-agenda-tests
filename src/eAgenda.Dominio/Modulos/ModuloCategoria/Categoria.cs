@@ -22,13 +22,13 @@ public class Categoria : EntidadeBase<Categoria>
         List<string> erros = [];
 
         if (string.IsNullOrWhiteSpace(Titulo))
-            erros.Add("O campo \"Titulo\" deve ser preenchido.");
+            erros.Add("O campo \"Título\" deve ser preenchido.");
 
         else if (Titulo.Length < 2)
-            erros.Add("O campo \"Titulo\" deve conter no mínimo 2 caracteres.");
+            erros.Add("O campo \"Título\" deve conter no mínimo 2 caracteres.");
 
         else if (Titulo.Length > 100)
-            erros.Add("O campo \"Titulo\" deve conter no máximo 100 caracteres.");
+            erros.Add("O campo \"Título\" deve conter no máximo 100 caracteres.");
 
         return erros;
     }
