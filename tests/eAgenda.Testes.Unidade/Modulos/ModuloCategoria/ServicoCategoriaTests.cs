@@ -128,10 +128,10 @@ public sealed class ServicoCategoriaTestes
         Assert.IsTrue(resultado.IsSuccess);
         repositorioCategoria.Verify(r => r.Editar(categoriaExistente.Id, It.IsAny<Categoria>()), Times.Once);
 
-        List<ListarCategoriasDto> contatosListados = servicoCategoria.SelecionarTodos();
+        List<ListarCategoriasDto> categoriasListadas = servicoCategoria.SelecionarTodos();
 
-        Assert.HasCount(1, contatosListados);
-        Assert.AreEqual("Mercado", contatosListados[0].Titulo);
+        Assert.HasCount(1, categoriasListadas);
+        Assert.AreEqual("Mercado", categoriasListadas[0].Titulo);
     }
 
     [TestMethod]
