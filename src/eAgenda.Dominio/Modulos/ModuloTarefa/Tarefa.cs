@@ -91,18 +91,15 @@ public class Tarefa : EntidadeBase<Tarefa>
         List<string> erros = [];
 
         if (string.IsNullOrWhiteSpace(Titulo))
-            erros.Add("O campo \"Titulo\" deve ser preenchido.");
+            erros.Add("O campo \"Título\" deve ser preenchido.");
 
         else if (Titulo.Length < 2)
-            erros.Add("O campo \"Titulo\" deve conter no mínimo 2 caracteres.");
+            erros.Add("O campo \"Título\" deve conter no mínimo 2 caracteres.");
 
         else if (Titulo.Length > 100)
-            erros.Add("O campo \"Titulo\" deve conter no máximo 100 caracteres.");
+            erros.Add("O campo \"Título\" deve conter no máximo 100 caracteres.");
 
-        if (!Enum.IsDefined(Prioridade))
-            erros.Add("O campo \"Prioridade\" deve ser preenchido.");
-
-        else if (!Enum.IsDefined(typeof(PrioridadeTarefa), Prioridade))
+        if (!Enum.IsDefined(typeof(PrioridadeTarefa), Prioridade))
             erros.Add("O campo \"Prioridade\" deve ter valores válidos.");
 
         if (DataCriacao == default)
