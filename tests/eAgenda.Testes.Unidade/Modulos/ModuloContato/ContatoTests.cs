@@ -4,7 +4,6 @@ namespace eAgenda.Testes.Unidade.Modulos.ModuloContato;
 [TestClass]
 public sealed class ContatoTests
 {
-    #region Nome
     [TestMethod]
     public void Validar_ComNomeVazio_DeveRetornarErro()
     {
@@ -67,10 +66,6 @@ public sealed class ContatoTests
         Assert.HasCount(0, erros);
     }
 
-    #endregion
-
-    #region Email
-
     [TestMethod]
     public void Validar_EmailComFormatoInvalido_DeveRetornarErro()
     {
@@ -98,10 +93,6 @@ public sealed class ContatoTests
             erros.First()
         );
     }
-
-    #endregion
-
-    #region Telefone
 
     [TestMethod]
     public void Validar_TelefoneComFormatoInvalido_DeveRetornarErro()
@@ -137,10 +128,6 @@ public sealed class ContatoTests
         Assert.HasCount(0, erros);
     }
 
-    #endregion
-
-    #region Cargo
-
     [TestMethod]
     public void Validar_CargoComNomeLongo_DeveRetornarErro()
     {
@@ -155,10 +142,6 @@ public sealed class ContatoTests
         );
     }
 
-    #endregion
-
-    #region Empresa
-
     [TestMethod]
     public void Validar_EmpresaComNomeLongo_DeveRetornarErro()
     {
@@ -172,8 +155,6 @@ public sealed class ContatoTests
             erros.First()
         );
     }
-
-    #endregion
 
     [TestMethod]
     public void Atualizar_DeveAtualizar_DadosValidos()
