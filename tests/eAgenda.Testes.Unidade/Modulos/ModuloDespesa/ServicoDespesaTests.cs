@@ -159,21 +159,22 @@ public sealed class ServicoDespesaTests
     }
 
     [TestMethod]
-    public void Cadastrar_DespesaSemDataOcorrencia_RetornaErro()
+    public void Cadastrar_DespesaSemDataOcorrencia_AssumeDataDeCadastro()
     {
         Mock<IRepositorioDespesa> repositorioDespesa = new Mock<IRepositorioDespesa>();
         Mock<IRepositorioCategoria> repositorioCategoria = new Mock<IRepositorioCategoria>();
-
+        Despesa? despesaCadastrada = null;
+        repositorioDespesa
+            .Setup(r => r.Cadastrar(It.IsAny<Despesa>()))
+            .Callback<Despesa>(d => despesaCadastrada = d);
         Categoria categoria = new Categoria("Transporte");
         repositorioCategoria
             .Setup(r => r.SelecionarTodos())
             .Returns(new List<Categoria> { categoria });
-
         ServicoDespesa servicoDespesa = new ServicoDespesa(
             repositorioDespesa.Object,
             repositorioCategoria.Object
         );
-
         Result resultado = servicoDespesa.Cadastrar(new CadastrarDespesaDto(
             "Táxi",
             null,
@@ -181,10 +182,10 @@ public sealed class ServicoDespesaTests
             FormaPagamento.Debito,
             new List<Guid> { categoria.Id }
         ));
-
-        Assert.IsFalse(resultado.IsSuccess);
-        Assert.AreEqual("O campo \"Data de Ocorrência\" deve ser preenchido.", resultado.Errors[0].Message);
-        repositorioDespesa.Verify(r => r.Cadastrar(It.IsAny<Despesa>()), Times.Never);
+        Assert.IsTrue(resultado.IsSuccess);
+        Assert.IsNotNull(despesaCadastrada);
+        Assert.AreEqual(DateTime.Today, despesaCadastrada.DataOcorrencia);
+        repositorioDespesa.Verify(r => r.Cadastrar(It.IsAny<Despesa>()), Times.Once);
     }
 
     [TestMethod]
