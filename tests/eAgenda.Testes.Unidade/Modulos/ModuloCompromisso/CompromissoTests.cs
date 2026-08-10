@@ -539,5 +539,30 @@ namespace eAgenda.Testes.Unidade.Modulos.ModuloCompromisso
 
         #endregion
 
+        [TestMethod]
+        public void ValidarCompromisso_RemotoLinkFormatoInvalido_DeveRetornarErro()
+        {
+            // Arrange
+            Compromisso compromisso = new Compromisso(
+                "Reunião online",
+                new DateTime(2026, 12, 8),
+                new TimeSpan(14, 0, 0),
+                new TimeSpan(15, 0, 0),
+                TipoCompromisso.Remoto,
+                null,
+                "/vjk-mkpd-zex?pli=1&authuser=7",
+                null
+            );
+
+            // Act
+            List<string> erros = compromisso.Validar();
+
+            // Assert
+            Assert.HasCount(1, erros);
+            Assert.AreEqual(
+                "O campo \"Link\" deve conter um endereço de site válido.",
+                erros.First()
+            );
+        }
     }
 }
