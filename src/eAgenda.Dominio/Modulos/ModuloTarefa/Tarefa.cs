@@ -88,19 +88,25 @@ public class Tarefa : EntidadeBase<Tarefa>
 
     public override List<string> Validar()
     {
-        List<string> erros = [];
+        List<string> erros = new();
 
         if (string.IsNullOrWhiteSpace(Titulo))
             erros.Add("O campo \"Título\" deve ser preenchido.");
+        else
+        {
+            if (Titulo.Length < 2)
+                erros.Add("O campo \"Título\" deve conter no mínimo 2 caracteres.");
+            if (Titulo.Length > 100)
+                erros.Add("O campo \"Título\" deve conter no máximo 100 caracteres.");
+        }
 
-        else if (Titulo.Length < 2)
-            erros.Add("O campo \"Título\" deve conter no mínimo 2 caracteres.");
-
-        else if (Titulo.Length > 100)
-            erros.Add("O campo \"Título\" deve conter no máximo 100 caracteres.");
-
-        if (!Enum.IsDefined(typeof(PrioridadeTarefa), Prioridade))
-            erros.Add("O campo \"Prioridade\" deve ter valores válidos.");
+        if (!Enum.IsDefined(Prioridade))
+        {
+            if (string.IsNullOrWhiteSpace(Titulo))
+                erros.Add("O campo \"Prioridade\" deve ser preenchido.");
+            else
+                erros.Add("O campo \"Prioridade\" deve ter valores válidos.");
+        }
 
         if (DataCriacao == default)
             erros.Add("O campo \"Data de Criação\" deve ser preenchido.");

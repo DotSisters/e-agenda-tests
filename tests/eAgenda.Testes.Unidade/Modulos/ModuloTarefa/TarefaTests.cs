@@ -57,7 +57,7 @@ public sealed class TarefaTests
         CollectionAssert.AreEquivalent(
             new[]
             {
-                "O campo \"Titulo\" deve ser preenchido.",
+                "O campo \"Título\" deve ser preenchido.",
                 "O campo \"Prioridade\" deve ser preenchido."
             },
             erros
@@ -73,7 +73,7 @@ public sealed class TarefaTests
 
         Assert.HasCount(1, erros);
         Assert.AreEqual(
-            "O campo \"Titulo\" deve conter no mínimo 2 caracteres.",
+            "O campo \"Título\" deve conter no mínimo 2 caracteres.",
             erros.First()
         );
     }
@@ -97,7 +97,7 @@ public sealed class TarefaTests
 
         Assert.HasCount(1, erros);
         Assert.AreEqual(
-            "O campo \"Titulo\" deve conter no máximo 100 caracteres.",
+            "O campo \"Título\" deve conter no máximo 100 caracteres.",
             erros.First()
         );
     }
