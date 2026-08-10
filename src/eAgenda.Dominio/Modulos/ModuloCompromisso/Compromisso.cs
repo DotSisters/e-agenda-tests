@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using eAgenda.Dominio.Compartilhado;
 using eAgenda.Dominio.Modulos.ModuloContato;
 
@@ -55,7 +56,7 @@ public class Compromisso : EntidadeBase<Compromisso>
         if (HoraTermino == default)
             erros.Add("O campo \"Hora de Término\" deve ser preenchido.");
 
-        if (HoraTermino <= HoraInicio)
+        else if (HoraTermino <= HoraInicio)
             erros.Add("A hora de término deve ser posterior à hora de início.");
 
         if (!Enum.IsDefined(Tipo))
@@ -64,14 +65,18 @@ public class Compromisso : EntidadeBase<Compromisso>
         if (Tipo == TipoCompromisso.Presencial && string.IsNullOrWhiteSpace(Local))
             erros.Add("O campo \"Local\" deve ser preenchido para compromissos presenciais.");
 
-        else if (!string.IsNullOrWhiteSpace(Local) && Local.Length > 255)
+        if (!string.IsNullOrWhiteSpace(Local) && Local.Length > 255)
             erros.Add("O campo \"Local\" deve conter no máximo 255 caracteres.");
 
         if (Tipo == TipoCompromisso.Remoto && string.IsNullOrWhiteSpace(Link))
             erros.Add("O campo \"Link\" deve ser preenchido para compromissos remotos.");
 
-        else if (!string.IsNullOrWhiteSpace(Link) && Link.Length > 500)
+        if (!string.IsNullOrWhiteSpace(Link) && Link.Length > 500)
             erros.Add("O campo \"Link\" deve conter no máximo 500 caracteres.");
+
+        else if (!string.IsNullOrWhiteSpace(Link) &&
+                 !Regex.IsMatch(Link, @"^(https?:\/\/)?([\w\-]+\.)+[a-zA-Z]{2,}(\/\S*)?$"))
+            erros.Add("O campo \"Link\" deve conter um endereço de site válido.");
 
         return erros;
     }
