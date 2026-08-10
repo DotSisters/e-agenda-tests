@@ -6,7 +6,7 @@ namespace eAgenda.Dominio.Modulos.ModuloDespesa;
 public class Despesa : EntidadeBase<Despesa>
 {
     public string Descricao { get; set; } = string.Empty;
-    public DateTime DataOcorrencia { get; set; } = DateTime.Today;
+    public DateTime DataOcorrencia { get; set; }
     public decimal Valor { get; set; }
     public FormaPagamento FormaPagamento { get; set; }
     public List<Categoria> Categorias { get; set; } = [];
