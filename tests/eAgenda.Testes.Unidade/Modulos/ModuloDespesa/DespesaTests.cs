@@ -100,7 +100,7 @@ public sealed class DespesaTests
     }
 
     [TestMethod]
-    public void Validar_FormaPagamentoEmBranco_DeveApresentarErro()
+    public void Validar_FormaPagamentoInvalida_DeveApresentarErro()
     {
         List<Categoria> categorias = new List<Categoria>
         {
@@ -251,7 +251,7 @@ public sealed class DespesaTests
     }
 
     [TestMethod]
-    public void ValidarDespesa_ValorNegatvo_DeveApresentarErro()
+    public void ValidarDespesa_ValorNegativo_DeveApresentarErro()
     {
         List<Categoria> categorias = new List<Categoria>
         {

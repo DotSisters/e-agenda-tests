@@ -24,7 +24,9 @@ public class Despesa : EntidadeBase<Despesa>
     ) : this()
     {
         Descricao = descricao;
-        DataOcorrencia = dataOcorrencia.Date;
+        DataOcorrencia = dataOcorrencia == default
+            ? DateTime.Today
+            : dataOcorrencia.Date;
         Valor = valor;
         FormaPagamento = formaPagamento;
         Categorias = categorias;
