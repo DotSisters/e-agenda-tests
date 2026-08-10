@@ -207,7 +207,7 @@ public sealed class ServicoItensTarefaTests
 
         ServicoTarefa servicoTarefa = new ServicoTarefa(repositorioTarefa.Object);
 
-        RemoverItemTarefaDto dto = new RemoverItemTarefaDto(tarefa.Id, item1.Id);
+        RemoverItemTarefaDto dto = new RemoverItemTarefaDto(tarefa.Id, item2.Id);
         Result resultado = servicoTarefa.RemoverItem(dto);
 
         Assert.IsTrue(resultado.IsSuccess);
