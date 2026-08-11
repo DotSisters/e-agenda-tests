@@ -40,7 +40,6 @@ public class RepositorioDespesaEmOrmTests : RepositorioBaseEmOrmTests
     [TestMethod]
     public void ConcluirItem_TarefaComQuatroItensPendentes_DeveAtualizarPercentual()
     {
-        // arrange: cadastrar tarefa com 4 itens pendentes
         Tarefa tarefa = Builder<Tarefa>
             .CreateNew()
             .With(t => t.Titulo = "Organizar festa")
@@ -57,7 +56,6 @@ public class RepositorioDespesaEmOrmTests : RepositorioBaseEmOrmTests
         repositorioTarefa.Cadastrar(tarefa);
         dbContext.ChangeTracker.Clear();
 
-        // act: concluir um item
         Tarefa? tarefaSelecionada = repositorioTarefa.SelecionarPorId(tarefa.Id);
         Assert.IsNotNull(tarefaSelecionada);
 
@@ -67,14 +65,12 @@ public class RepositorioDespesaEmOrmTests : RepositorioBaseEmOrmTests
         repositorioTarefa.Editar(tarefaSelecionada.Id, tarefaSelecionada);
         dbContext.ChangeTracker.Clear();
 
-        // assert: validar percentual atualizado
         Tarefa? tarefaAtualizada = repositorioTarefa.SelecionarPorId(tarefa.Id);
 
         Assert.IsNotNull(tarefaAtualizada);
         Assert.AreEqual("Organizar festa", tarefaAtualizada.Titulo);
         Assert.AreEqual(PrioridadeTarefa.Alta, tarefaAtualizada.Prioridade);
 
-        // 1 de 4 itens concluídos → 25%
         Assert.AreEqual(25, tarefaAtualizada.PercentualConcluido);
         Assert.IsFalse(tarefaAtualizada.Concluida);
         Assert.IsNull(tarefaAtualizada.DataConclusao);
