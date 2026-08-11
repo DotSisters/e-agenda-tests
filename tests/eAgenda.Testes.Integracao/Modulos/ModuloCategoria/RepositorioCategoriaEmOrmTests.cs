@@ -1,4 +1,5 @@
 using eAgenda.Dominio.Modulos.ModuloCategoria;
+using eAgenda.Dominio.Modulos.ModuloDespesa;
 using eAgenda.Testes.Integracao.Compartilhado.Orm;
 using FizzWare.NBuilder;
 
@@ -98,6 +99,44 @@ public class RepositorioCategoriaEmOrmTests : RepositorioBaseEmOrmTests
 
         Assert.IsNotNull(categoriaSelecionada);
         Assert.AreEqual(categoria.Id, categoriaSelecionada.Id);
+    }
+
+    [TestMethod]
+    public void SelecionarPorId_ComDespesasVinculadas_RetornaCategoriaComDespesas()
+    {
+        Categoria categoria = Builder<Categoria>
+            .CreateNew()
+            .With(c => c.Titulo = "Lazer")
+            .Persist();
+
+        Despesa despesa1 = new Despesa(
+            "Cinema",
+            DateTime.Today,
+            50.00m,
+            FormaPagamento.Credito,
+            new List<Categoria> { categoria }
+        );
+
+        Despesa despesa2 = new Despesa(
+            "Show",
+            DateTime.Today,
+            120.00m,
+            FormaPagamento.Debito,
+            new List<Categoria> { categoria }
+        );
+
+        repositorioDespesa.Cadastrar(despesa1);
+        repositorioDespesa.Cadastrar(despesa2);
+
+        dbContext.ChangeTracker.Clear();
+
+        Categoria? categoriaSelecionada = repositorioCategoria.SelecionarPorId(categoria.Id);
+
+        Assert.IsNotNull(categoriaSelecionada);
+        Assert.AreEqual(categoria.Id, categoriaSelecionada.Id);
+        Assert.HasCount(2, categoriaSelecionada.Despesas);
+        Assert.IsTrue(categoriaSelecionada.Despesas.Any(d => d.Descricao == "Cinema"));
+        Assert.IsTrue(categoriaSelecionada.Despesas.Any(d => d.Descricao == "Show"));
     }
 
     [TestMethod]
