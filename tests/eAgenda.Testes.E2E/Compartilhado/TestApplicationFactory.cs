@@ -54,7 +54,3 @@ public sealed class TestApplicationFactory : WebApplicationFactory<Program>
         return enderecos.Addresses.Single();
     }
 }
-
-internal class GeradorDeProvasDbContext
-{
-}
