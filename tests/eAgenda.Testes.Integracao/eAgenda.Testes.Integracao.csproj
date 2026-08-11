@@ -24,6 +24,7 @@
     <Folder Include="Modulos/ModuloCategoria/" />
     <Folder Include="Modulos/ModuloCompromisso/" />
     <Folder Include="Modulos/ModuloContato/" />
+    <Folder Include="Modulos/ModuloTarefa/" />
   </ItemGroup>
 
   <ItemGroup>
