@@ -14,7 +14,9 @@ using eAgenda.Infra.Modulos.ModuloTarefa;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace eAgenda.Infra;
 
@@ -23,10 +25,34 @@ public static class InjecaoDependencia
     public static void AddInfraRepositories(
         this IServiceCollection services,
         IConfiguration configuration,
-        ILoggingBuilder logging
+        ILoggingBuilder logging,
+        IHostEnvironment environment
     )
     {
-        services.AddSerilogLogger(configuration, logging);
+        // Injeta logs do Serilog
+        Serilog.ILogger logger = SerilogFactory.Create(configuration, environment);
+
+        logging.ClearProviders();
+
+        services.AddSerilog(logger, dispose: true);
+
+        // Injeta o DbContext do EF
+        services.AddDbContext<EAgendaDbContext>(options =>
+        {
+            string? connectionString = configuration.GetConnectionString("SqlServerEF");
+
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                throw new InvalidOperationException(
+                    $"A connection string \"SqlServerEF\" não foi encontrada."
+                );
+            }
+
+            options.UseSqlServer(connectionString, opt =>
+            {
+                opt.EnableRetryOnFailure(3);
+            });
+        });
 
         services.AddDbContext<EAgendaDbContext>(options =>
        {

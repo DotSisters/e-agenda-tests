@@ -118,13 +118,12 @@ public class RepositorioDespesaEmOrmTests : RepositorioBaseEmOrmTests
         Assert.AreEqual(150.00m, despesaSelecionada.Valor);
         Assert.AreEqual(FormaPagamento.AVista, despesaSelecionada.FormaPagamento);
 
-        Assert.AreEqual(default(DateTime), despesaSelecionada.DataOcorrencia);
+        Assert.AreEqual(DateTime.Today, despesaSelecionada.DataOcorrencia);
 
         Assert.IsNotNull(despesaSelecionada.Categorias);
         Assert.HasCount(1, despesaSelecionada.Categorias);
         Assert.AreEqual("Aniversário", despesaSelecionada.Categorias[0].Titulo);
     }
-
 
     [TestMethod]
     public void Editar_AlteraValorECategoria_DevePersistirAlteracoes()
