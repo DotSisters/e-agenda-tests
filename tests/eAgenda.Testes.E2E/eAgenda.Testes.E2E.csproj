@@ -22,6 +22,7 @@
   <ItemGroup>
     <Folder Include="Compartilhado/" />
     <Folder Include="Modulos/" />
+    <Folder Include="Modulos/ModuloCategoria/" />
     <Folder Include="Modulos/ModuloCompromisso/" />
     <Folder Include="Modulos/ModuloContato/" />
   </ItemGroup>
