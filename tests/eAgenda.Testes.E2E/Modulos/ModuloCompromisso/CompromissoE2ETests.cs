@@ -1,6 +1,5 @@
 using System;
 using eAgenda.Testes.E2E.Compartilhado;
-using GeradorDeProvas.Testes.E2E.Modulos.ModuloCompromisso;
 using Microsoft.Playwright;
 using Microsoft.Playwright.MSTest;
 
@@ -325,7 +324,4 @@ public class CompromissoE2ETests : E2ETestsBase
         await Expect(listarPage.NomeDoCompromisso("Reunião para Exclusão"))
             .Not.ToBeVisibleAsync();
     }
-
-
-
 }

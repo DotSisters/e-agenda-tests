@@ -1,6 +1,6 @@
 using Microsoft.Playwright;
 
-namespace GeradorDeProvas.Testes.E2E.Modulos.ModuloCompromisso;
+namespace eAgenda.Testes.E2E.Modulos.ModuloCompromisso;
 
 public sealed class CompromissoListarPage(
     IPage page,
